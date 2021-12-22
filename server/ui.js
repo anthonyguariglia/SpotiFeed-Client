@@ -1,6 +1,6 @@
 // const store = require('../app/store')
 const $ = require('jquery')
-const { onGetPlaylists } = require('./events')
+// const { onGetPlaylists } = require('./events')
 // const spotifyEvents = require('./events')
 
 // const onLoginSpotifySuccess = function () {
@@ -116,6 +116,18 @@ const onGetPlaylistsFailure = function () {
 
 }
 
+const onGetArtistsSuccess = function (response) {
+  const artists = response
+  console.log(artists)
+  artists.forEach((artist) => {
+    $('.artist-list').append(`<li class="playlists">${artist}</li>`)
+  })
+}
+
+const onGetArtistsFailure = function () {
+
+}
+
 module.exports = {
   onGetDataSuccess,
   onGetDataFailure,
@@ -130,5 +142,7 @@ module.exports = {
   onGetPlaylistDataSuccess,
   onGetPlaylistDataFailure,
   onGetPlaylistsSuccess,
-  onGetPlaylistsFailure
+  onGetPlaylistsFailure,
+  onGetArtistsSuccess,
+  onGetArtistsFailure
 }

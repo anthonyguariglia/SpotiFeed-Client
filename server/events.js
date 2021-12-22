@@ -63,6 +63,13 @@ const onGetPlaylists = function () {
     .catch(updateUi.onGetPlaylistsFailure)
 }
 
+const onGetArtists = function () {
+  spotifyApi
+    .getArtists()
+    .then(updateUi.onGetArtistsSuccess)
+    .catch(updateUi.onGetArtistsFailure)
+}
+
 module.exports = {
   onLoginSpotify,
   onGetData,
@@ -71,5 +78,6 @@ module.exports = {
   onAddAlbumToPlaylist,
   onDeleteAlbumFromPlaylist,
   onGetPlaylistData,
-  onGetPlaylists
+  onGetPlaylists,
+  onGetArtists
 }

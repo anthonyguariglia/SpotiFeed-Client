@@ -82,6 +82,16 @@ const getPlaylists = function (name) {
   })
 }
 
+const getArtists = function (name) {
+  return $.ajax({
+    method: 'GET',
+    url: apiUrl + '/user/artists',
+    headers: {
+      secret_token: store.user.token
+    }
+  })
+}
+
 module.exports = {
   loginSpotify,
   getData,
@@ -90,5 +100,6 @@ module.exports = {
   deletePlaylist,
   deleteAlbumFromPlaylist,
   getPlaylistData,
-  getPlaylists
+  getPlaylists,
+  getArtists
 }
