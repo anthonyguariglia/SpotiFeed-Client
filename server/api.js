@@ -3,6 +3,18 @@ const { apiUrl } = require('../app/config')
 const store = require('../app/store')
 const $ = require('jquery')
 
+const loginSpotify = function () {
+  return $.ajax({
+    method: 'GET',
+    url: apiUrl + '/loginSpotify',
+    type: 'jsonp',
+    headers: {
+      method: 'GET, OPTIONS',
+      'Access-Control-Allow-Origin': 'http://localhost:7165'
+    }
+  })
+}
+
 const getData = function () {
   return $.ajax({
     method: 'GET',
@@ -60,11 +72,23 @@ const getPlaylistData = function (name) {
   })
 }
 
+const getPlaylists = function (name) {
+  return $.ajax({
+    method: 'GET',
+    url: apiUrl + '/user/playlists',
+    headers: {
+      secret_token: store.user.token
+    }
+  })
+}
+
 module.exports = {
+  loginSpotify,
   getData,
   createPlaylist,
   addAlbumToPlaylist,
   deletePlaylist,
   deleteAlbumFromPlaylist,
-  getPlaylistData
+  getPlaylistData,
+  getPlaylists
 }

@@ -2,6 +2,12 @@ const getFormFields = require('../lib/get-form-fields.js')
 const spotifyApi = require('./api')
 const updateUi = require('./ui')
 
+const onLoginSpotify = function () {
+  spotifyApi
+    .loginSpotify()
+    // .then(onGetData())
+}
+
 const onGetData = function () {
   spotifyApi
     .getData()
@@ -15,7 +21,7 @@ const onCreatePlaylist = function (event) {
   const form = event.target
   const formData = getFormFields(form)
   const name = formData.name
-  
+
   spotifyApi
     .createPlaylist(name)
     .then(updateUi.onCreatePlaylistSuccess)
@@ -46,15 +52,24 @@ const onDeleteAlbumFromPlaylist = function (name, id) {
 const onGetPlaylistData = function (name) {
   spotifyApi
     .getPlaylistData(name)
-    .then(updateUi.onGetPlaylistSuccess)
-    .catch(updateUi.onGetPlaylistFailure)
+    .then(updateUi.onGetPlaylistDataSuccess)
+    .catch(updateUi.onGetPlaylistDataFailure)
+}
+
+const onGetPlaylists = function () {
+  spotifyApi
+    .getPlaylists()
+    .then(updateUi.onGetPlaylistsSuccess)
+    .catch(updateUi.onGetPlaylistsFailure)
 }
 
 module.exports = {
+  onLoginSpotify,
   onGetData,
   onCreatePlaylist,
   onDeletePlaylist,
   onAddAlbumToPlaylist,
   onDeleteAlbumFromPlaylist,
-  onGetPlaylistData
+  onGetPlaylistData,
+  onGetPlaylists
 }
