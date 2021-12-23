@@ -14,6 +14,11 @@ $(() => {
   $('.sign-up-button').on('click', authEvents.onSignUpButton)
   $('.sign-out-button').on('click', authEvents.onSignOut)
 
-  $('.new-playlist').on('submit', spotifyEvents.onCreatePlaylist)
+  $('.new-playlist-input').on('submit', spotifyEvents.onCreatePlaylist)
+  $('.recent-uploads').off('click', '.release-date')
+  $('.recent-uploads').on('click', '.dropdown-item', spotifyEvents.onAddAlbumToPlaylist)
+
+  $('.playlist-list').on('click', '.playlists', spotifyEvents.onGetPlaylistData)
+
   // your JS code goes here
 })

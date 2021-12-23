@@ -35,9 +35,15 @@ const onDeletePlaylist = function (name) {
     .catch(updateUi.onDeletePlaylistFailure)
 }
 
-const onAddAlbumToPlaylist = function (name, id) {
+const onAddAlbumToPlaylist = function (event) {
+  event.preventDefault()
+  console.log(event.target.id)
+  const playlistAlbum = event.target.id
+  const playlistName = playlistAlbum.split('-')[0]
+  const albumId = playlistAlbum.split('-')[1]
+  console.log(playlistName, albumId)
   spotifyApi
-    .addAlbumToPlaylist(name, id)
+    .addAlbumToPlaylist(playlistName, albumId)
     .then(updateUi.onAddAlbumSuccess)
     .catch(updateUi.onAddAlbumFailure)
 }
@@ -49,9 +55,11 @@ const onDeleteAlbumFromPlaylist = function (name, id) {
     .catch(updateUi.onDeleteAlbumFailure)
 }
 
-const onGetPlaylistData = function (name) {
+const onGetPlaylistData = function (event) {
+  event.preventDefault()
+  const playlistName = event.target.id
   spotifyApi
-    .getPlaylistData(name)
+    .getPlaylistData(playlistName)
     .then(updateUi.onGetPlaylistDataSuccess)
     .catch(updateUi.onGetPlaylistDataFailure)
 }

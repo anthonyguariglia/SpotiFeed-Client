@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>SpotiFeed</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -10,8 +10,635 @@
       <!-- Do not add `script` tags-->
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="https://kit.fontawesome.com/de3ddfd947.js" crossorigin="anonymous"></script>
     </head>
-    <body>
-      <h1>Browser Template</h1>
+    <style>
+      html {
+        width: 100%;
+        min-height: 22000px;
+        background-color: black;
+      }
+      .body {
+        max-width: 2000px;
+      }
+      .website-title {
+        font-size: 40px;
+        padding: 0px;
+        text-align: left;
+        color: white;
+        margin-top: 0px;
+        position: relative;
+        top: -25px;
+        left: -60px;
+      }
+      .header {
+        position: fixed;
+        height: 50px;
+        width: 100%;
+        margin: 0;
+        padding: 50px;
+        background: black;
+        z-index: 10;
+      }
+      .recent-uploads {
+        margin-top: 68px;
+        position: static;
+        left: 280px;
+        margin-left: 0;
+        border-radius: 10px;
+        background-color: #191919;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        height: 22250px;
+        padding-bottom: -10px;
+        margin-bottom: 10px;
+      }
+      .body {
+        background: #191919;
+        height: 100%;
+      }
+      /* .left-side {
+        background-color: black;
+      } */
+      .spotifeed-content {
+        background-color: black;
+        position: relative;
+        padding: 0;
+        top: 100px;
+        height: 100%;
+        overflow-x: hidden;
+      }
+      .spotifeed {
+        padding: 15px 0 15px 15px;
+        margin-top: 0px;
+      }
+      img {
+        margin-left: 40px;
+        padding-bottom: 10px;
+      }
+      .album-upload {
+        width: 1000px;
+        height: 250px;
+        /* border: 1px solid white; */
+        border-radius: 10px;
+        background-color: black;
+        margin: 25px;
+      }
+      .album-art {
+        height: 200px;
+        width: 200px;
+        position: relative;
+        top: 0px;
+        left: 0px;
+        margin: 25px;
+        padding: 0;
+      }
+      .album-title {
+        position: relative;
+        left: 250px;
+        top: -110px;
+        font-size: 34px;
+      }
+      .album-artists {
+        position: relative;
+        left: 250px;
+        top: -125px;
+        color: #b3b3b3;
+      }
+      .release-date {
+        position: relative;
+        left: 250px;
+        top: -325px;
+      }
+      .add-to-playlist {
+        position: relative;
+        text-align: center;
+        left: 840px;
+        top: -275px;
+        color: #b3b3b3;
+        border-radius: 10px;
+        transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        z-index: 3;
+        width: 140px;
+      }
+      .add-to-playlist:hover {
+        color: black;
+        background-color: #ff8e00;
+      }
+      li {
+        list-style-type: none;
+        text-align: center;
+        position: relative; 
+        height: 100%;
+        padding: 16px;
+      }
+      .get-data {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+
+      }
+      .new-playlist {
+        display: block;
+        border: none;
+        border-radius: 3px;
+        height: 38px;
+        width: 100%;
+        margin: 10px auto 0 auto;
+        background-color: #ff8e00; 
+      }
+      .new-playlist:hover {
+        color: white;
+        background-color: #804600; 
+      }
+      .playlists {
+        text-align: left;
+        color: #b3b3b3;
+        background-color: #191919;
+        border-radius: 5px;
+        margin: 5px;
+        /* box-shadow: -1px black; */
+        transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out, text-align 0.4s ease-in-out;
+      }
+      .playlists:hover {
+        /* text-align: center; */
+        background: black;
+        color: white;
+      }
+      .plus-sign {
+        height: 48px;
+        margin: 10px;
+      }
+      .nav-titles {
+        width: 100%;
+        text-align: center;
+        margin: 20px auto;
+      }
+      .left-side {
+        position: static;
+        margin: 0 10px 10px 10px;
+        /* padding: 10px; */
+        background-color: black;
+        border-radius: 10px;
+        z-index: 9;
+        /* border: 1px solid white; */
+      }
+      .leftside-nav {
+        width: 100%;
+        text-align: center;
+        background-color: #191919;
+        border-radius: 10px;
+        margin: 20px 0;
+        padding: 0px;
+      }
+      .login-window {
+        /* position: static; */
+        /* margin: 0 10px 10px 10px; */
+        width: 100%;
+        padding: 10px;
+        background-color: #191919;
+        border-radius: 10px;
+      }
+      .login {
+        width: 100%;
+        border: 1px solid #b3b3b3;
+        /* margin: 0 0 0px 12px; */
+      }
+      .update {
+          position: fixed;
+          width: 16.45%;
+          margin: 10px auto;
+          padding: 10px;
+          background-color: #191919;
+          border-radius: 10px;
+        }
+      .playlist-list {
+        width: 100%;
+      }
+      .dropdown-menu {
+        border-radius: 10px;
+      }
+      .dropdown-menu > li {
+        padding: 0;
+      }
+      .playlist-header {
+        height: 58px;
+        color: white;
+        position: static;
+        margin: 0 0 10px 0;
+        padding: 10px;
+        background-color: #191919;
+        border-radius: 10px;
+        overflow-x: hidden;
+        text-align: center;
+        font-size: 24px;
+      }
+      .back-button {
+        position: absolute;
+        left: 25px;
+        top: 8px;
+        height: 42px;
+        width: 42px;
+        border-radius: 21px;
+        background-color: black;
+        border: 2px solid black;
+      }
+      .back-button:hover {
+        background-color: #ff8e00;
+        
+      }
+      .back-button:hover > .reload {
+        color: black;
+      }
+      .back-button:active {
+        background-color: #9d5c0d;
+      }
+      .back-button:active > .reload {
+        color: #232323;
+      }
+      .playlist-name {
+        position: relative;
+        margin: 0 auto;
+      }
+      .reload {
+        position: relative;
+        top: -1px;
+        left: -0.5px;
+        font-size: 18px;
+      }
+      .artist-list {
+        /* position: sticky; */
+      }
+      .artists {
+        /* height: 100%; */
+      }
+    </style>
+    <body class="body">
+
+      <header class="header">
+        <h1 class="website-title"><span class="logo"><img src="./public/2021_12_20_0r3_Kleki.png" alt="SpotiFeed" style="height: 50px"></span><span class="spotifeed">SpotiFeed</span></h1>
+      </header>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title d-flex justify-content-center" id="exampleModalLabel">Sign In</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- Add this to a modal within the login header -->
+      
+              <p class="signin-response-message d-flex justify-content-center"></p>
+              <form id="sign-in-form" class="d-flex justify-content-center align-items-center">
+                <input type="email" name="email" placeholder="john@appleseed.com"
+                  class="input-group-lg input-sign-in mx-1 p-1">
+                <input type="password" name="password" placeholder="password"
+                  class="input-group-lg input-sign-in mx-1 p-1">
+                <button type="submit" class="sign-in-button btn btn-success btn-sm mx-1 p-1">Submit</button>
+              </form>
+              <form id="sign-out-form">
+                <div class="d-grid gap-2 col-8 mx-auto">
+                  <button type="submit" class="sign-out-button btn btn-success col p-1">Sign Out</button>
+                </div>
+              </form>
+              <br>
+              <div class="d-grid gap-2 col-8 mx-auto">
+                <button class="sign-up-button btn btn-dark col p-1">Don't have an account? Sign up here!</button>
+                <div class="col"></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary p-1" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="createPlaylistModal" tabindex="-1" aria-labelledby="createPlaylistModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="createPlaylistModalLabel">New Playlist</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="submit" class="new-playlist-input">
+                <input type="text" name="name" class="playlist-name" placeholder="Enter Playlist Name">
+                <button class="btn btn-success create-playlist">Create</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="spotifeed-content d-flex flex-row container-fluid ">
+
+
+        
+
+        <div class="left-side bd-sidebar position-sticky start-0 col-2" style="color: white">
+          <!-- Button trigger modal -->
+          <div class="login-window">
+            <button type="button" class="login btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              style=" color: white; border-color: #b3b3b3;">
+              Log In
+            </button>
+          </div>
+          <div class="update">
+
+            <button class="get-data btn btn-success">Get Latest Tracks</button>
+          
+            <button type="button" class="new-playlist" data-bs-toggle="modal"
+              data-bs-target="#createPlaylistModal">
+              New Playlist
+            </button>
+
+            <nav class="leftside-nav bd-links">
+
+              <h4 class="nav-titles">Playlists</h4>
+
+              <div class="playlist-list">
+                <li style="color: transparent;"></li>
+              </div>
+
+              <!-- <h4 class="nav-titles">Artists</h4>
+
+              <div class="artist-list">
+                <nav class="artists">
+                  <li style="color: transparent;"></li>
+                </nav>
+              </div> -->
+            </nav>
+
+          </div>
+        </div>
+
+        
+
+        <section class="main-content d-block" style="color: white">
+          
+          <section class="playlist-header col-12" style="position: fixed; width: 1050px;z-index: 4; margin-bottom: 10px;">
+            <p class="back-button d-inline"><i class="fas fa-redo-alt reload" ></i></p>
+            <div class="d-inline playlist-name">
+              Most Recent Tracks
+            </div>
+          </section>
+
+          <section class="recent-uploads d-block">
+
+            <!-- <section class="album-upload">
+              <img src="https://i.scdn.co/image/ab67616d00001e02605bf35d12f50a6f2d0f0517" alt="" class="album-art">
+              <section class="album-title">Group Therapy 465</section>
+              <div class="dropstart">
+                <section class="dropdown-toggle add-to-playlist" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Add to Playlist
+              </section>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+              <section class="album-artists">
+                <span>Above & Beyond</span>
+                <span>, </span>
+                <span>Above & Beyond Group Therapy</span>
+                <span>, </span>
+                <span>Anjunabeats</span>
+              </section>
+              <section class="release-date">2 days ago</section>
+            </section> -->
+
+            <!-- <section class="album-upload">
+              <img src="https://i.scdn.co/image/ab67616d00001e02605bf35d12f50a6f2d0f0517" alt="" class="album-art">
+              <section class="album-title">Group Therapy 465</section>
+                <section class="dropdown-toggle add-to-playlist" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Add to Playlist
+                </section>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+              <section class="album-artists">
+                <span>Above & Beyond</span>
+                <span>, </span>
+                <span>Above & Beyond Group Therapy</span>
+                <span>, </span>
+                <span>Anjunabeats</span>
+              </section>
+              <section class="release-date">2 days ago</section>
+            </section>
+
+            <section class="album-upload">
+              <img src="https://i.scdn.co/image/ab67616d00001e02605bf35d12f50a6f2d0f0517" alt="" class="album-art">
+              <section class="album-title">Group Therapy 465</section>
+              <div class="dropstart">
+                <section class="dropdown-toggle add-to-playlist" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Add to Playlist
+                </section>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+              <section class="album-artists">
+                <span>Above & Beyond</span>
+                <span>, </span>
+                <span>Above & Beyond Group Therapy</span>
+                <span>, </span>
+                <span>Anjunabeats</span>
+              </section>
+              <section class="release-date">2 days ago</section>
+            </section>
+
+            <section class="album-upload">
+              <img src="https://i.scdn.co/image/ab67616d00001e02605bf35d12f50a6f2d0f0517" alt="" class="album-art">
+              <section class="album-title">Group Therapy 465</section>
+              <div class="dropstart">
+                <section class="dropdown-toggle add-to-playlist" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Add to Playlist
+                </section>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+              <section class="album-artists">
+                <span>Above & Beyond</span>
+                <span>, </span>
+                <span>Above & Beyond Group Therapy</span>
+                <span>, </span>
+                <span>Anjunabeats</span>
+              </section>
+              <section class="release-date">2 days ago</section>
+            </section>
+
+            <section class="album-upload">
+              <img src="https://i.scdn.co/image/ab67616d00001e02605bf35d12f50a6f2d0f0517" alt="" class="album-art">
+              <section class="album-title">Group Therapy 465</section>
+              <div class="dropstart">
+                <section class="dropdown-toggle add-to-playlist" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Add to Playlist
+                </section>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+              <section class="album-artists">
+                <span>Above & Beyond</span>
+                <span>, </span>
+                <span>Above & Beyond Group Therapy</span>
+                <span>, </span>
+                <span>Anjunabeats</span>
+              </section>
+              <section class="release-date">2 days ago</section>
+            </section>
+
+            <section class="album-upload">
+              <img src="https://i.scdn.co/image/ab67616d00001e02605bf35d12f50a6f2d0f0517" alt="" class="album-art">
+              <section class="album-title">Group Therapy 465</section>
+              <div class="dropstart">
+                <section class="dropdown-toggle add-to-playlist" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Add to Playlist
+                </section>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+              <section class="album-artists">
+                <span>Above & Beyond</span>
+                <span>, </span>
+                <span>Above & Beyond Group Therapy</span>
+                <span>, </span>
+                <span>Anjunabeats</span>
+              </section>
+              <section class="release-date">2 days ago</section>
+            </section>
+
+            <section class="album-upload">
+              <img src="https://i.scdn.co/image/ab67616d00001e02605bf35d12f50a6f2d0f0517" alt="" class="album-art">
+              <section class="album-title">Group Therapy 465</section>
+              <div class="dropstart">
+                <section class="dropdown-toggle add-to-playlist" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Add to Playlist
+                </section>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+              <section class="album-artists">
+                <span>Above & Beyond</span>
+                <span>, </span>
+                <span>Above & Beyond Group Therapy</span>
+                <span>, </span>
+                <span>Anjunabeats</span>
+              </section>
+              <section class="release-date">2 days ago</section>
+            </section>
+            
+            <section class="album-upload">
+              <img src="https://i.scdn.co/image/ab67616d00001e02605bf35d12f50a6f2d0f0517" alt="" class="album-art">
+              <section class="album-title">Group Therapy 465</section>
+              <section class="dropdown-toggle add-to-playlist" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Add to Playlist
+              </section>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+              </div>
+              <section class="album-artists">
+                <span>Above & Beyond</span>
+                <span>, </span>
+                <span>Above & Beyond Group Therapy</span>
+                <span>, </span>
+                <span>Anjunabeats</span>
+              </section>
+              <section class="release-date">2 days ago</section>
+            </section>
+            
+            <section class="album-upload">
+              <img src="https://i.scdn.co/image/ab67616d00001e02605bf35d12f50a6f2d0f0517" alt="" class="album-art">
+              <section class="album-title">Group Therapy 465</section>
+              <div class="dropstart">
+                <section class="dropdown-toggle add-to-playlist" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Add to Playlist
+                </section>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+              <section class="album-artists">
+                <span>Above & Beyond</span>
+                <span>, </span>
+                <span>Above & Beyond Group Therapy</span>
+                <span>, </span>
+                <span>Anjunabeats</span>
+              </section>
+              <section class="release-date">2 days ago</section>
+            </section>
+            
+            <section class="album-upload">
+              <img src="https://i.scdn.co/image/ab67616d00001e02605bf35d12f50a6f2d0f0517" alt="" class="album-art">
+              <section class="album-title">Group Therapy 465</section>
+              <div class="dropstart">
+                <section class="dropdown-toggle add-to-playlist" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Add to Playlist
+                </section>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+              <section class="album-artists">
+                <span>Above & Beyond</span>
+                <span>, </span>
+                <span>Above & Beyond Group Therapy</span>
+                <span>, </span>
+                <span>Anjunabeats</span>
+              </section>
+              <section class="release-date">2 days ago</section>
+            </section> -->
+            
+
+
+          </section>
+        </section>
+
+        
+
+          
+        
+      </section>
     </body>
 </html>
