@@ -1,6 +1,6 @@
 let apiUrl
 const apiUrls = {
-  production: '<replace-with-heroku-url>',
+  production: 'https://pure-harbor-08948.herokuapp.com',
   development: 'http://localhost:3000'
 }
 
