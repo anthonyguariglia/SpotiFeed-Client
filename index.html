@@ -84,6 +84,9 @@
         background-color: black;
         margin: 25px;
       }
+      #sign-out-form {
+        display: none;
+      }
       .album-art {
         height: 200px;
         width: 200px;
@@ -152,11 +155,14 @@
         background-color: #804600; 
       }
       .playlists {
-        text-align: left;
+        /* text-align: left; */
+        display: inline-flex;
+        width: 100%;
         color: #b3b3b3;
         background-color: #191919;
         border-radius: 5px;
         margin: 5px;
+        padding: 10px;
         /* box-shadow: -1px black; */
         transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out, text-align 0.4s ease-in-out;
       }
@@ -205,15 +211,17 @@
         /* margin: 0 0 0px 12px; */
       }
       .update {
-          position: fixed;
-          width: 16.45%;
-          margin: 10px auto;
-          padding: 10px;
-          background-color: #191919;
-          border-radius: 10px;
-        }
+        position: fixed;
+        width: 16.45%;
+        margin: 10px auto;
+        padding: 10px;
+        background-color: #191919;
+        border-radius: 10px;
+      }
       .playlist-list {
         width: 100%;
+        /* display: flex; */
+        align-items: baseline;
       }
       .dropdown-menu {
         border-radius: 10px;
@@ -266,12 +274,51 @@
         left: -0.5px;
         font-size: 18px;
       }
-      .artist-list {
-        /* position: sticky; */
+      .loginSpotify {
+        margin: 0 auto 20px auto;
+        border-radius: 20px;
+        width: 200px;
+        height: 40px;
+        border: none;
+        background-color: #ff8e00;
       }
-      .artists {
-        /* height: 100%; */
+      .loginSpotify:hover {
+        color: white;
+        background-color: #804600; 
       }
+      #loginSpotify {
+        margin: 0 auto;
+      }
+      .playlist-text {
+        width: 90%;
+        text-align: start;
+        margin-bottom: 0;
+      }
+      .trash {
+        margin: auto 0;
+        border-radius: 50%;
+        padding: 6px;
+        color: #191919;
+        transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      }
+     .trash:hover {
+        color: white;
+      }
+      .trash:active {
+        color: #b3b3b3;
+      }
+      /* .modal-header {
+        background-color: #191919;
+        color: white;
+      }
+      .modal-footer {
+        background-color: #191919;
+        color: white;
+      }
+      .modal-body {
+        background-color: #b3b3b3;
+        color: white;
+      } */
     </style>
     <body class="body">
 
@@ -291,6 +338,9 @@
               <!-- Add this to a modal within the login header -->
       
               <p class="signin-response-message d-flex justify-content-center"></p>
+              <div class="d-grid gap-2 col-8 mx-auto">
+                <div id="loginSpotify"></div>
+              </div>
               <form id="sign-in-form" class="d-flex justify-content-center align-items-center">
                 <input type="email" name="email" placeholder="john@appleseed.com"
                   class="input-group-lg input-sign-in mx-1 p-1">
@@ -364,7 +414,11 @@
               <h4 class="nav-titles">Playlists</h4>
 
               <div class="playlist-list">
-                <li style="color: transparent;"></li>
+                <!-- <li style="color: transparent;"></li> -->
+                <!-- <li class="playlists"><p class="playlist-text">how ya doin</p><i class="far fa-trash-alt trash"></i></li>
+                <li class="playlists"><p class="playlist-text">how ya doin</p><i class="far fa-trash-alt trash"></i></li>
+                <li class="playlists"><p class="playlist-text">how ya doin</p><i class="far fa-trash-alt trash"></i></li>
+                <li class="playlists"><p class="playlist-text">how ya doin</p><i class="far fa-trash-alt trash"></i></li> -->
               </div>
 
               <!-- <h4 class="nav-titles">Artists</h4>

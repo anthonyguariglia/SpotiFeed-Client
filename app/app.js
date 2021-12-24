@@ -19,6 +19,6 @@ $(() => {
   $('.recent-uploads').on('click', '.dropdown-item', spotifyEvents.onAddAlbumToPlaylist)
 
   $('.playlist-list').on('click', '.playlists', spotifyEvents.onGetPlaylistData)
-
+  $('.playlist-list').on('click', '.trash', spotifyEvents.onDeletePlaylist)
   // your JS code goes here
 })

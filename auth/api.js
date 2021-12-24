@@ -22,9 +22,9 @@ const signIn = function (data) {
 const signOut = function (data) {
   return $.ajax({
     method: 'DELETE',
-    url: apiUrl.apiUrl + '/logout',
+    url: apiUrl.apiUrl + '/user/logout',
     headers: {
-      Authorization: 'Bearer ' + store.user.token
+      secret_token: store.user.token
     }
   })
 }

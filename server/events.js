@@ -28,7 +28,8 @@ const onCreatePlaylist = function (event) {
     .catch(updateUi.onCreatePlaylistFailure)
 }
 
-const onDeletePlaylist = function (name) {
+const onDeletePlaylist = function (event) {
+  const name = event.target.id
   spotifyApi
     .deletePlaylist(name)
     .then(updateUi.onDeletePlaylistSuccess)

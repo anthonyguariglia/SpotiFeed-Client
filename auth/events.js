@@ -3,6 +3,7 @@ const getFormFields = require('../lib/get-form-fields.js')
 const authApi = require('./api.js')
 const authUi = require('./ui.js')
 const $ = require('jquery')
+const spotifyEvents = require('../server/events')
 
 const onSignUp = function (event) {
   event.preventDefault()
@@ -38,6 +39,7 @@ const onSignOut = function (event) {
 const onSignUpButton = function (event) {
   event.preventDefault()
   $('.modal-title').html('Sign Up')
+  $('#sign-up-form').html('')
   $('.modal-body')
     .html(`<p class="signin-response-message d-flex justify-content-center"></p>
     <form id="sign-up-form" class="d-flex justify-content-center align-items-center flex-wrap">
@@ -57,8 +59,12 @@ const onSignUpButton = function (event) {
 const onSignInButton = function (event) {
   event.preventDefault()
   $('.modal-title').html('Sign In')
+  $('.modal-body').html('')
   $('.modal-body')
     .html(`<p class="signin-response-message d-flex justify-content-center"></p>
+    <div class="d-grid gap-2 col-8 mx-auto">
+                <div id="loginSpotify"><button class="loginSpotify">Log In with Spotify!</button></div>
+              </div>
     <form id="sign-in-form" class="d-flex justify-content-center align-items-center">
                 <input type="email" name="email" placeholder="john@appleseed.com" class="input-group-lg input-sign-in mx-1 p-1">
                 <input type="password" name="password" placeholder="password" class="input-group-lg input-sign-in mx-1 p-1">
@@ -74,9 +80,11 @@ const onSignInButton = function (event) {
                   <button class="sign-up-button btn btn-dark col p-1">Don't have an account? Sign up here!</button>
                   <div class="col"></div>
               </div>`)
+  $('.loginSpotify').css('display', 'none')
   $('#sign-in-form').on('submit', onSignIn)
   $('.sign-up-button').on('click', onSignUpButton)
   $('#sign-out-form').on('submit', onSignOut)
+  $('.loginSpotify').on('click', spotifyEvents.onLoginSpotify)
 }
 
 module.exports = {

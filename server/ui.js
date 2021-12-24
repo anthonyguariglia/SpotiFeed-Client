@@ -2,7 +2,8 @@
 const $ = require('jquery')
 const store = require('../app/store')
 // const { onGetPlaylists } = require('./events')
-// const spotifyEvents = require('./events')
+const spotifyApi = require('./api')
+const { apiUrl } = require('../app/config')
 
 // const onLoginSpotifySuccess = function () {
 //   spotifyEvents.onGetData()
@@ -37,9 +38,11 @@ const onGetDataSuccess = function (response) {
     const playlists = []
     let playlistHTMLFixed = []
     playlists.push(store.user.playlists)
-    // console.log(playlists)
-    playlists[0].forEach(playlist => {
-      playlistHTML.push(`<li><a class="dropdown-item" id="${playlist.name}-${album.id}">${playlist.name}</a></li>`)
+    // console.log(store.user.playlists)
+    playlists[0].forEach((playlist) => {
+      playlistHTML.push(
+				`<li><a class="dropdown-item" id="${playlist.name}-${album.id}">${playlist.name}</a></li>`
+      )
     })
     // console.log(playlistHTML)
     if (playlistHTML.length > 1) {
@@ -49,9 +52,12 @@ const onGetDataSuccess = function (response) {
     }
     // console.log(playlistHTMLFixed)
     const albumName = album.name
-    const name = albumName.length >= 50 ? albumName.slice(0, 50) + ' ...' : albumName
+    const name =
+			albumName.length >= 50 ? albumName.slice(0, 50) + ' ...' : albumName
 
-    $('.recent-uploads').append($('.recent-uploads'), `<section class="album-upload">
+    $('.recent-uploads').append(
+      $('.recent-uploads'),
+			`<section class="album-upload">
           <img src="${album.images[1].url}" alt="" class="album-art">
           <section class="album-title">${name}</section>
           <div class="dropstart">
@@ -67,7 +73,8 @@ const onGetDataSuccess = function (response) {
             <span>${artists}</span>
           </section>
           <section class="release-date">${differenceInDays} days ago</section>
-        </section>`)
+        </section>`
+    )
   }
 }
 
@@ -78,7 +85,18 @@ const onGetDataFailure = function () {
 const onCreatePlaylistSuccess = function (response) {
   // populate playlist on sidebar
   console.log(response)
-  $('.playlist-list').append(`<li class="playlists">${response}</li>`)
+  $('.playlist-list').append(`<li id="${response}" class="playlists"><p class="playlist-text">${response}</p><i class="far fa-trash-alt trash"></i></li>`
+  )
+  // $('.trash').on('click', () => {
+  //   return $.ajax({
+  //     method: 'DELETE',
+  //     url: apiUrl + '/user/playlists/' + response,
+  //     headers: {
+  //       secret_token: store.user.token
+  //     }
+  //   })
+  //     .then(response => onDeletePlaylistSuccess(response))
+  // })
 }
 
 const onCreatePlaylistFailure = function () {
@@ -88,10 +106,12 @@ const onCreatePlaylistFailure = function () {
 const onDeletePlaylistSuccess = function (response) {
   // remove playlist from sidebar
   console.log(response)
+  $(`#${response}`).hide()
 }
 
 const onDeletePlaylistFailure = function () {
   // add error handling
+  console.log('failed to delete playlist')
 }
 
 const onAddAlbumSuccess = function (response) {
@@ -115,7 +135,7 @@ const onDeleteAlbumFailure = function () {
 const onGetPlaylistDataSuccess = function (response) {
   // update playlistHTML
   console.log(response)
-  const albums = response.albums
+  const albums = response[0].albums
 
   console.log(albums)
 
@@ -158,12 +178,22 @@ const onGetPlaylistDataFailure = function () {
 const onGetPlaylistsSuccess = function (response) {
   const playlists = response
   // console.log(playlists)
+  $('.playlist-list').html('')
   playlists.forEach(playlist => {
     // console.log(playlist)
     store.user.playlists.push(playlist)
     // store.user.playlists.id = playlist._id
-    $('.playlist-list').html('')
-    $('.playlist-list').append(`<li id="${playlist.name}" class="playlists">${playlist.name}</li>`)
+    $('.playlist-list').append(`<li class="playlists"><p class="playlist-text">${playlist.name}</p><i id="${playlist.name}" class="far fa-trash-alt trash"></i></li>`
+    )
+    // $('.trash').on('click', () => {
+    //   return $.ajax({
+    //     method: 'DELETE',
+    //     url: apiUrl + '/user/playlists/' + response,
+    //     headers: {
+    //       secret_token: store.user.token
+    //     }
+    //   }).then((response) => onDeletePlaylistSuccess(response))
+    // })
   })
 }
 
