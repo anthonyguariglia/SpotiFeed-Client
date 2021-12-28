@@ -13,6 +13,7 @@ $(() => {
   $('#sign-in-form').on('submit', authEvents.onSignIn)
   $('.sign-up-button').on('click', authEvents.onSignUpButton)
   $('.sign-out-button').on('click', authEvents.onSignOut)
+  $('.forgot-pw').on('click', authEvents.onForgotPassword)
 
   $('.new-playlist-input').on('submit', spotifyEvents.onCreatePlaylist)
   $('.recent-uploads').off('click', '.release-date')
@@ -21,4 +22,5 @@ $(() => {
   $('.playlist-list').on('click', '.playlists', spotifyEvents.onGetPlaylistData)
   $('.playlist-list').on('click', '.trash', spotifyEvents.onDeletePlaylist)
   // your JS code goes here
+  $('.recent-uploads').on('click', '.remove-from-playlist', spotifyEvents.onDeleteAlbumFromPlaylist)
 })

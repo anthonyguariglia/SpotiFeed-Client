@@ -18,7 +18,7 @@ const onSignUpFailure = function () {
 }
 
 const onSignInSuccess = function (response) {
-  $('.signin-response-message').text('Successfully Signed In')
+  $('#exampleModal' > '.signin-response-message').text('Successfully Signed In')
   $('.signin-response-message').css('color', 'black')
   $('#loginSpotify').append('<button class="loginSpotify">Log In with Spotify!</button>')
   $('.loginSpotify').on('click', spotifyEvents.onLoginSpotify)
@@ -27,8 +27,9 @@ const onSignInSuccess = function (response) {
   $('.input-sign-in').css('display', 'none')
   $('.sign-in-button').css('display', 'none')
   $('#sign-out-form').css('display', 'unset')
+  $('.sign-out-button').css('display', 'block')
   $('.sign-up-button').css('display', 'none')
-
+  $('.forgot-pw').hide()
   $('.login').text('Log Out')
 
   store.user.token = response.token
@@ -45,18 +46,33 @@ const onSignInFailure = function () {
 const onSignOutSuccess = function () {
   $('.signin-response-message').text('Successfully Signed Out')
   $('.signin-response-message').css('color', 'black')
-  store.user.token = ''
+  store.user = {
+    token: '',
+    playlists: [],
+    refreshData: [],
+    scrollY: 0
+  }
+  $('.playlist-list').html('')
 
   $('.input-sign-in').css('display', 'unset')
   $('.sign-in-button').css('display', 'unset')
   $('.sign-up-button').css('display', 'unset')
   $('.sign-out-button').css('display', 'none')
   $('.loginSpotify').css('display', 'none')
-
+  $('.forgot-pw').show()
   $('.login').text('Log In')
 
   myModal.toggle()
   $('.signin-response-message').text('')
+}
+
+const onChangePasswordSuccess = function () {
+  $('.signin-response-message').text('Password Changed Successfully')
+  $('.signin-response-message').css('color', 'black')
+}
+
+const onChangePasswordFailure = function () {
+
 }
 
 module.exports = {
@@ -64,5 +80,7 @@ module.exports = {
   onSignUpFailure,
   onSignInSuccess,
   onSignInFailure,
-  onSignOutSuccess
+  onSignOutSuccess,
+  onChangePasswordSuccess,
+  onChangePasswordFailure
 }

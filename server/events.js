@@ -1,6 +1,8 @@
 const getFormFields = require('../lib/get-form-fields.js')
 const spotifyApi = require('./api')
 const updateUi = require('./ui')
+const $ = require('jquery')
+const store = require('../app/store')
 
 const onLoginSpotify = function () {
   spotifyApi
@@ -29,7 +31,7 @@ const onCreatePlaylist = function (event) {
 }
 
 const onDeletePlaylist = function (event) {
-  const name = event.target.id
+  const name = event.target.id.split('_').join(' ')
   spotifyApi
     .deletePlaylist(name)
     .then(updateUi.onDeletePlaylistSuccess)
@@ -49,20 +51,40 @@ const onAddAlbumToPlaylist = function (event) {
     .catch(updateUi.onAddAlbumFailure)
 }
 
-const onDeleteAlbumFromPlaylist = function (name, id) {
+const onDeleteAlbumFromPlaylist = function (event) {
+  console.log(event.target)
+  const playlistAlbum = event.target.id
+  const playlistName = playlistAlbum.split('-')[0]
+  let trackName
+  if (playlistAlbum.split('-').length === 3) {
+    trackName = playlistAlbum.split('-')[1] + '\u002D' + playlistAlbum.split('-')[2]
+  } else {
+    trackName = playlistAlbum.split('-')[1]
+  }
+  console.log(playlistName, trackName)
   spotifyApi
-    .deleteAlbumFromPlaylist(name, id)
+    .deleteAlbumFromPlaylist(playlistName, trackName)
     .then(updateUi.onDeleteAlbumSuccess)
     .catch(updateUi.onDeleteAlbumFailure)
 }
 
 const onGetPlaylistData = function (event) {
   event.preventDefault()
-  const playlistName = event.target.id
-  spotifyApi
-    .getPlaylistData(playlistName)
-    .then(updateUi.onGetPlaylistDataSuccess)
-    .catch(updateUi.onGetPlaylistDataFailure)
+  store.user.scrollY = window.scrollY
+  console.log('target of playlist: ', event.target)
+  console.log('parents of target', $(event.target).parents('.trash'))
+
+  try {
+    const siblings = $(event.target).siblings('.trash')
+    const playlistName = siblings[0].id.split('_').join(' ')
+    console.log(playlistName)
+    spotifyApi
+      .getPlaylistData(playlistName)
+      .then(updateUi.onGetPlaylistDataSuccess)
+      .catch(updateUi.onGetPlaylistDataFailure)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const onGetPlaylists = function () {

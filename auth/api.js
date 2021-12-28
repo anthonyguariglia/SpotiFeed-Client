@@ -29,8 +29,17 @@ const signOut = function (data) {
   })
 }
 
+const changePassword = function (data) {
+  return $.ajax({
+    method: 'POST',
+    url: apiUrl.apiUrl + '/change-password',
+    data
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
-  signOut
+  signOut,
+  changePassword
 }

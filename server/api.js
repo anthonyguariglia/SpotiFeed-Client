@@ -8,6 +8,7 @@ const loginSpotify = function () {
     method: 'GET',
     url: apiUrl + '/loginSpotify',
     type: 'jsonp',
+    crossDomain: true,
     headers: {
       method: 'GET, OPTIONS',
       'Access-Control-Allow-Origin': 'http://localhost:7165'

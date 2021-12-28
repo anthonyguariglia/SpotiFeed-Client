@@ -11,6 +11,7 @@
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="https://kit.fontawesome.com/de3ddfd947.js" crossorigin="anonymous"></script>
+      <meta name="referrer" content="no-referrer" />
     </head>
     <style>
       html {
@@ -148,7 +149,8 @@
         height: 38px;
         width: 100%;
         margin: 10px auto 0 auto;
-        background-color: #ff8e00; 
+        background-color: #ff8e00;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out; 
       }
       .new-playlist:hover {
         color: white;
@@ -242,37 +244,40 @@
         font-size: 24px;
       }
       .back-button {
+        display: none;
         position: absolute;
         left: 25px;
         top: 8px;
         height: 42px;
         width: 42px;
         border-radius: 21px;
-        background-color: black;
-        border: 2px solid black;
+        background-color: #191919;
+        /* border: 2px solid black; */
       }
       .back-button:hover {
-        background-color: #ff8e00;
+        background-color: black;
         
       }
       .back-button:hover > .reload {
         color: black;
       }
       .back-button:active {
-        background-color: #9d5c0d;
+        background-color: #ff8e00;
       }
       .back-button:active > .reload {
         color: #232323;
       }
-      .playlist-name {
-        position: relative;
-        margin: 0 auto;
-      }
       .reload {
         position: relative;
-        top: -1px;
-        left: -0.5px;
-        font-size: 18px;
+        top: -1.75px;
+        left: 0px;
+        font-size: 16px;
+      }
+      .left-arrow {
+        position: relative;
+        width: 16px;
+        font-size: 16px;
+        top: 0px;
       }
       .loginSpotify {
         margin: 0 auto 20px auto;
@@ -307,18 +312,44 @@
       .trash:active {
         color: #b3b3b3;
       }
-      /* .modal-header {
-        background-color: #191919;
-        color: white;
+      .remove-from-playlist {
+        position: relative;
+        text-align: center;
+        left: 800px;
+        top: -275px;
+        color: #b3b3b3;
+        border-radius: 10px;
+        transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        z-index: 3;
+        width: 180px;
       }
-      .modal-footer {
-        background-color: #191919;
-        color: white;
+      .remove-from-playlist:hover {
+        color: black;
+        background-color: rgb(211, 77, 77);
       }
-      .modal-body {
-        background-color: #b3b3b3;
+      .create-playlist {
+        display: block;
+        border: none;
+        border-radius: 3px;
+        height: 30px;
+        width: 50%;
+        margin: 10px auto 0 auto;
+        background-color: #ff8e00;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out; 
+      }
+      .create-playlist:hover {
         color: white;
-      } */
+        background-color: #804600; 
+      }
+      .enter-playlist-name {
+        text-align: center;
+        margin-left: 116.5px;
+        height: 30px;
+        width: 50%;
+      }
+      #change-pw-form {
+        display: block;
+      }
     </style>
     <body class="body">
 
@@ -356,6 +387,7 @@
               <br>
               <div class="d-grid gap-2 col-8 mx-auto">
                 <button class="sign-up-button btn btn-dark col p-1">Don't have an account? Sign up here!</button>
+                <a href="#" class="forgot-pw mx-auto">Forgot Password?</a>
                 <div class="col"></div>
               </div>
             </div>
@@ -376,8 +408,8 @@
             </div>
             <div class="modal-body">
               <form action="submit" class="new-playlist-input">
-                <input type="text" name="name" class="playlist-name" placeholder="Enter Playlist Name">
-                <button class="btn btn-success create-playlist">Create</button>
+                <input type="text" name="name" class="enter-playlist-name" placeholder="Enter Playlist Name">
+                <button class="create-playlist">Create</button>
               </form>
             </div>
             <div class="modal-footer">
@@ -438,13 +470,26 @@
         <section class="main-content d-block" style="color: white">
           
           <section class="playlist-header col-12" style="position: fixed; width: 1050px;z-index: 4; margin-bottom: 10px;">
-            <p class="back-button d-inline"><i class="fas fa-redo-alt reload" ></i></p>
+            <p class="back-button" aria-label="Back to Home" role="button"></p>
             <div class="d-inline playlist-name">
               Most Recent Tracks
             </div>
           </section>
 
           <section class="recent-uploads d-block">
+
+            <!-- <section class="album-upload">
+              <img src="${album.images[1].url}" alt="" class="album-art">
+              <section class="album-title">${name}</section>
+              <div class="remove-from-playlist">
+                <section type="button" id="${name}">Remove from Playlist
+                </section>
+              </div>
+              <section class="album-artists">
+                <span>${artists}</span>
+              </section>
+              <section class="release-date">${differenceInDays} days ago</section>
+            </section> -->
 
             <!-- <section class="album-upload">
               <img src="https://i.scdn.co/image/ab67616d00001e02605bf35d12f50a6f2d0f0517" alt="" class="album-art">

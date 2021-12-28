@@ -1,7 +1,9 @@
 const store = {
   user: {
     token: '',
-    playlists: []
+    playlists: [],
+    refreshData: [],
+    scrollY: 0
   }
 }
 
