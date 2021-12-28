@@ -31,7 +31,8 @@ const onSignInSuccess = function (response) {
   $('.sign-up-button').css('display', 'none')
   $('.forgot-pw').hide()
   $('.login').text('Log Out')
-
+  console.log(response.redirectUrl)
+  // $('.modal-body').html(response.html)
   store.user.token = response.token
   console.log(response.token)
   spotifyEvents.onGetPlaylists()

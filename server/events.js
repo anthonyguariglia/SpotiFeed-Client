@@ -7,6 +7,8 @@ const store = require('../app/store')
 const onLoginSpotify = function () {
   spotifyApi
     .loginSpotify()
+    .then(updateUi.onLoginSpotifySuccess)
+    .catch(updateUi.onLoginSpoitifyFailure)
     // .then(onGetData())
 }
 

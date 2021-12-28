@@ -11,6 +11,16 @@ const store = require('../app/store')
 //   spotifyEvents.onGetData()
 // }
 
+const onLoginSpotifySuccess = function (response) {
+  const loginData = window.open(response.redirectUrl)
+  console.log(loginData.Window.closed)
+  $('#loginSpotify').html('')
+}
+
+const onLoginSpotifyFailure = function () {
+  console.log('failed to redirect to spotify login')
+}
+
 const onGetDataSuccess = function (response) {
   console.log(store.user.playlists)
   store.user.refreshData = response
@@ -354,20 +364,22 @@ const generateDateArtistsPlaylists = (album) => {
 }
 
 module.exports = {
-  onGetDataSuccess,
-  onGetDataFailure,
-  onCreatePlaylistSuccess,
-  onCreatePlaylistFailure,
-  onDeletePlaylistSuccess,
-  onDeletePlaylistFailure,
-  onAddAlbumSuccess,
-  onAddAlbumFailure,
-  onDeleteAlbumSuccess,
-  onDeleteAlbumFailure,
-  onGetPlaylistDataSuccess,
-  onGetPlaylistDataFailure,
-  onGetPlaylistsSuccess,
-  onGetPlaylistsFailure,
-  onGetArtistsSuccess,
-  onGetArtistsFailure
+	onLoginSpotifySuccess,
+	onLoginSpotifyFailure,
+	onGetDataSuccess,
+	onGetDataFailure,
+	onCreatePlaylistSuccess,
+	onCreatePlaylistFailure,
+	onDeletePlaylistSuccess,
+	onDeletePlaylistFailure,
+	onAddAlbumSuccess,
+	onAddAlbumFailure,
+	onDeleteAlbumSuccess,
+	onDeleteAlbumFailure,
+	onGetPlaylistDataSuccess,
+	onGetPlaylistDataFailure,
+	onGetPlaylistsSuccess,
+	onGetPlaylistsFailure,
+	onGetArtistsSuccess,
+	onGetArtistsFailure
 }
