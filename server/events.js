@@ -1,3 +1,5 @@
+/* eslint-disable no-tabs */
+/* eslint-disable indent */
 const getFormFields = require('../lib/get-form-fields.js')
 const spotifyApi = require('./api')
 const updateUi = require('./ui')
@@ -13,6 +15,9 @@ const onLoginSpotify = function () {
 }
 
 const onGetData = function () {
+  $('.recent-uploads').html(
+		'<div class="loading-image"><img src="https://i.imgur.com/zhCrmFO.gif" alt="loading" style="height: 100px; margin: 75px 480px;"></div>'
+	)
   spotifyApi
     .getData()
     .then(updateUi.onGetDataSuccess)

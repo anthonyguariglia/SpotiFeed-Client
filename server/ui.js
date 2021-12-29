@@ -221,6 +221,9 @@ const onGetPlaylistDataSuccess = function (response) {
 }
 
 const onBackButton = function () {
+  $('.recent-uploads').html(
+		'<div class="loading-image"><img src="https://i.imgur.com/zhCrmFO.gif" alt="loading" style="height: 100px; margin: 75px 480px;"></div>'
+	)
   const refreshData = store.user.refreshData
   // console.log(refreshData[0].images[1].url)
   window.scrollTo(0, store.user.scrollY)

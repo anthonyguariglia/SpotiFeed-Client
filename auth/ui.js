@@ -54,7 +54,7 @@ const onSignOutSuccess = function () {
     scrollY: 0
   }
   $('.playlist-list').html('')
-
+  $('.recent-uploads').html('')
   $('.input-sign-in').css('display', 'unset')
   $('.sign-in-button').css('display', 'unset')
   $('.sign-up-button').css('display', 'unset')
