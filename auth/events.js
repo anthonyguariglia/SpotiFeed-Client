@@ -93,20 +93,22 @@ const onSignInButton = function (event) {
               <br>
               <div class="d-grid gap-2 col-8 mx-auto">
                   <button class="sign-up-button btn btn-dark col p-1">Don't have an account? Sign up here!</button>
-                  <a href="#" class="forgot-pw mx-auto">Forgot Password?</a>
+                  
                   <div class="col"></div>
               </div>`)
   $('.loginSpotify').css('display', 'none')
   $('#sign-in-form').on('submit', onSignIn)
   $('#change-pw-form').on('submit', onChangePassword)
   $('.sign-up-button').on('click', onSignUpButton)
+  $('.sign-out-button').on('click', onSignOut)
   $('.loginSpotify').on('click', spotifyEvents.onLoginSpotify)
-  $('.forgot-pw').on('click', onForgotPassword)
+  $('.forgot-pw').on('click', onChangePasswordButton)
 }
 
-const onForgotPassword = function (event) {
+const onChangePasswordButton = function (event) {
   $('.modal-title').html('Change Password')
   $('.modal-body').html('')
+  $('#loginSpotify').hide()
   $('.modal-body')
 		.html(`<p class="signin-response-message d-flex justify-content-center"></p>
     <form id="change-pw-form" class="d-block justify-content-center align-items-center">
@@ -118,18 +120,60 @@ const onForgotPassword = function (event) {
               </form>
               <br>
               <div class="d-grid gap-2 col-8 mx-auto">
-                <button class="sign-in-button-return btn btn-dark col p-1">Back to Sign In</button>
+                <button class="go-back-button btn btn-dark col p-1">Back</button>
               </div>`)
   $('#change-pw-form').on('submit', onChangePassword)
-  $('.sign-in-button-return').on('click', onSignInButton)
+  $('.go-back-button').on('click', onGoBackButton)
+}
+
+const onGoBackButton = function () {
+  $('.modal-title').html('Log Out')
+
+  $('.modal-body').html(`
+    <p class="signin-response-message d-flex justify-content-center"></p>
+      <div class="d-grid gap-2 col-8 mx-auto">
+        <div id="loginSpotify"><button class="loginSpotify">Log In with Spotify!</button></div>
+      </div>
+      <form id="sign-in-form" class="d-flex justify-content-center align-items-center">
+        <input type="email" name="email" placeholder="john@appleseed.com"
+          class="input-group-lg input-sign-in mx-1 p-1">
+        <input type="password" name="password" placeholder="password"
+          class="input-group-lg input-sign-in mx-1 p-1">
+        <button type="submit" class="sign-in-button btn btn-success btn-sm mx-1 p-1">Submit</button>
+      </form>
+    <form id="sign-out-form">
+      <div class="d-grid gap-2 col-8 mx-auto">
+        <button type="submit" class="sign-out-button btn btn-success col p-1">Sign Out</button>
+      </div>
+    </form>
+    <br>
+    <div class="d-grid gap-2 col-8 mx-auto">
+      <button class="sign-up-button btn btn-dark col p-1">Don't have an account? Sign up here!</button>
+      <a href="#" class="forgot-pw mx-auto">Change Password</a>
+      <div class="col"></div>
+    </div>`)
+	$('.signin-response-message').css('color', 'black')
+  $('.input-sign-in').css('display', 'none')
+	$('.sign-in-button').css('display', 'none')
+	$('.sign-up-button').css('display', 'none')
+  $('#sign-out-form').css('display', 'unset')
+  $('#sign-in-form').on('submit', onSignIn)
+	$('#change-pw-form').on('submit', onChangePassword)
+	$('.sign-up-button').on('click', onSignUpButton)
+	$('.sign-out-button').on('click', onSignOut)
+	$('.loginSpotify').on('click', spotifyEvents.onLoginSpotify)
+  $('.sign-out-button').on('click', onSignOut)
+  $('.forgot-pw').on('click', onChangePasswordButton)
+	$('form').trigger('reset')
 }
 
 module.exports = {
-  onSignUp,
-  onSignIn,
-  onSignOut,
-  onChangePassword,
-  onSignInButton,
-  onSignUpButton,
-  onForgotPassword
+	onSignUp,
+	onSignIn,
+	onSignOut,
+	onChangePassword,
+	onSignInButton,
+	onSignUpButton,
+	onChangePasswordButton,
+	onGoBackButton
 }

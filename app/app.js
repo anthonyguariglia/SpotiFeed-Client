@@ -13,7 +13,7 @@ $(() => {
   $('#sign-in-form').on('submit', authEvents.onSignIn)
   $('.sign-up-button').on('click', authEvents.onSignUpButton)
   $('.sign-out-button').on('click', authEvents.onSignOut)
-  $('.forgot-pw').on('click', authEvents.onForgotPassword)
+  $('.forgot-pw').on('click', authEvents.onChangePasswordButton)
 
   $('.new-playlist-input').on('submit', spotifyEvents.onCreatePlaylist)
   $('.recent-uploads').off('click', '.release-date')

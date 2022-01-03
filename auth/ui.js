@@ -18,7 +18,7 @@ const onSignUpFailure = function () {
 }
 
 const onSignInSuccess = function (response) {
-  $('#exampleModal' > '.signin-response-message').text('Successfully Signed In')
+  $('.signin-response-message').text('Successfully Signed In')
   $('.signin-response-message').css('color', 'black')
   $('#loginSpotify').append('<button class="loginSpotify">Log In with Spotify!</button>')
   $('.loginSpotify').on('click', spotifyEvents.onLoginSpotify)
@@ -29,12 +29,12 @@ const onSignInSuccess = function (response) {
   $('#sign-out-form').css('display', 'unset')
   $('.sign-out-button').css('display', 'block')
   $('.sign-up-button').css('display', 'none')
-  $('.forgot-pw').hide()
+  $('.forgot-pw').css('display', 'unset')
   $('.login').text('Log Out')
-  console.log(response.redirectUrl)
+  // console.log(response.redirectUrl)
   // $('.modal-body').html(response.html)
   store.user.token = response.token
-  console.log(response.token)
+  // console.log(response.token)
   spotifyEvents.onGetPlaylists()
   spotifyEvents.onGetArtists()
 }
@@ -60,7 +60,7 @@ const onSignOutSuccess = function () {
   $('.sign-up-button').css('display', 'unset')
   $('.sign-out-button').css('display', 'none')
   $('.loginSpotify').css('display', 'none')
-  $('.forgot-pw').show()
+  $('.forgot-pw').css('display', 'none')
   $('.login').text('Log In')
 
   myModal.toggle()

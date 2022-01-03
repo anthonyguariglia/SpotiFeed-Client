@@ -47,11 +47,11 @@ const onDeletePlaylist = function (event) {
 
 const onAddAlbumToPlaylist = function (event) {
   event.preventDefault()
-  console.log(event.target.id)
+  // console.log(event.target.id)
   const playlistAlbum = event.target.id
   const playlistName = playlistAlbum.split('-')[0]
   const albumId = playlistAlbum.split('-')[1]
-  console.log(playlistName, albumId)
+  // console.log(playlistName, albumId)
   spotifyApi
     .addAlbumToPlaylist(playlistName, albumId)
     .then(updateUi.onAddAlbumSuccess)
@@ -59,7 +59,7 @@ const onAddAlbumToPlaylist = function (event) {
 }
 
 const onDeleteAlbumFromPlaylist = function (event) {
-  console.log(event.target)
+  // console.log(event.target)
   const playlistAlbum = event.target.id
   const playlistName = playlistAlbum.split('-')[0]
   let trackName
@@ -68,7 +68,7 @@ const onDeleteAlbumFromPlaylist = function (event) {
   } else {
     trackName = playlistAlbum.split('-')[1]
   }
-  console.log(playlistName, trackName)
+  // console.log(playlistName, trackName)
   spotifyApi
     .deleteAlbumFromPlaylist(playlistName, trackName)
     .then(updateUi.onDeleteAlbumSuccess)
@@ -78,19 +78,19 @@ const onDeleteAlbumFromPlaylist = function (event) {
 const onGetPlaylistData = function (event) {
   event.preventDefault()
   store.user.scrollY = window.scrollY
-  console.log('target of playlist: ', event.target)
-  console.log('parents of target', $(event.target).parents('.trash'))
+  // console.log('target of playlist: ', event.target)
+  // console.log('parents of target', $(event.target).parents('.trash'))
 
   try {
     const siblings = $(event.target).siblings('.trash')
     const playlistName = siblings[0].id.split('_').join(' ')
-    console.log(playlistName)
+    // console.log(playlistName)
     spotifyApi
       .getPlaylistData(playlistName)
       .then(updateUi.onGetPlaylistDataSuccess)
       .catch(updateUi.onGetPlaylistDataFailure)
-  } catch (error) {
-    console.log(error)
+  } catch {
+    // console.log(error)
   }
 }
 

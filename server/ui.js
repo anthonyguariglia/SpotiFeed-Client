@@ -12,17 +12,17 @@ const store = require('../app/store')
 // }
 
 const onLoginSpotifySuccess = function (response) {
-  const loginData = window.open(response.redirectUrl)
-  console.log(loginData.Window.closed)
+  window.open(response.redirectUrl)
+  // console.log(loginData.Window.closed)
   $('#loginSpotify').html('')
 }
 
 const onLoginSpotifyFailure = function () {
-  console.log('failed to redirect to spotify login')
+  // console.log('failed to redirect to spotify login')
 }
 
 const onGetDataSuccess = function (response) {
-  console.log(store.user.playlists)
+  // console.log(store.user.playlists)
   store.user.refreshData = response
   const refreshData = response
   // console.log(refreshData[0].images[1].url)
@@ -99,7 +99,7 @@ const onGetDataFailure = function () {
 
 const onCreatePlaylistSuccess = function (response) {
   // populate playlist on sidebar
-  console.log(response)
+  // console.log(response)
   if (response) {
     store.user.playlists.push({
       albums: [],
@@ -118,19 +118,19 @@ const onCreatePlaylistFailure = function () {
 
 const onDeletePlaylistSuccess = function (response) {
   // remove playlist from sidebar
-  console.log('deleted playlist: ', response)
+  // console.log('deleted playlist: ', response)
   const playlistName = trackify(response)
   $(`#${playlistName}`).parent().remove()
 }
 
 const onDeletePlaylistFailure = function () {
   // add error handling
-  console.log('failed to delete playlist')
+  // console.log('failed to delete playlist')
 }
 
 const onAddAlbumSuccess = function (response) {
   // populate playlist html with album - run a getPlaylistData?
-  console.log(response)
+  // console.log(response)
 }
 
 const onAddAlbumFailure = function () {
@@ -139,9 +139,9 @@ const onAddAlbumFailure = function () {
 
 const onDeleteAlbumSuccess = function (response) {
   // remove playlist html - run a getPlaylistData?
-  console.log('deleted album response: ', response)
+  // console.log('deleted album response: ', response)
   const playlistAlbum = response
-  console.log('playlist album: ', playlistAlbum)
+  // console.log('playlist album: ', playlistAlbum)
   const playlistName = trackify(playlistAlbum.split('-')[0])
   let trackName
   if (playlistAlbum.split('-').length === 3) {
@@ -150,7 +150,7 @@ playlistAlbum.split('-')[2])
   } else {
    trackName = trackify(playlistAlbum.split('-')[1])
   }
-  console.log(`.${playlistName}-${trackName}`)
+  // console.log(`.${playlistName}-${trackName}`)
   $(`.${playlistName}-${trackName}`).fadeOut(500)
   // spotifyApi
   //   .getPlaylistData(playlistName)
@@ -182,13 +182,13 @@ const trackify = function (track) {
 
 const onGetPlaylistDataSuccess = function (response) {
   // update playlistHTML
-  console.log('playlist data', response)
+  // console.log('playlist data', response)
   window.scrollTo(0, 0)
   if (response) {
     const albums = response.albums
 
-    console.log(albums)
-
+    // console.log(albums)
+    $('.playlist-name').html(`${response.name}`)
     $('.recent-uploads').html('')
     albums.forEach(async (album) => {
       const data = await generateDateArtistsPlaylists(album)
@@ -199,7 +199,6 @@ const onGetPlaylistDataSuccess = function (response) {
       const trackName = trackify(album.name)
       const albumName = album.name
       const name = albumName.length >= 50 ? albumName.slice(0, 50) + ' ...' : albumName
-      $('.playlist-name').html(`${response.name}`)
       $('.back-button').html('<i class="fas fa-arrow-left left-arrow"></i>')
       $('.back-button').css('display', 'unset')
       $('.back-button').on('click', onBackButton)
