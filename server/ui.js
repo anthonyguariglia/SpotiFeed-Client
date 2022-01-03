@@ -176,6 +176,8 @@ const trackify = function (track) {
 		.replace('$', '')
 		.replace('+', '')
     .replace('&', '')
+    .replace('!', '')
+    .replace('?', '')
 }
 
 const onGetPlaylistDataSuccess = function (response) {

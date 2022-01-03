@@ -1,130 +1,49 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+# SpotiFeed
+By Anthony Guariglia
 
-# browser-template
+## Overview
 
-A template for starting front-end projects. Webpack for `require` system, build
-pipeline, and development server. Boostrap and Handlebars.js included. No
-front-end frameworks included.
+This application provides a way for Spotify users to see the recent uploads of their followed artists in a news-feed style display. Once signed in, the app allows the user to log into their Spotify account and then pulls their followed artists, finds their most recent singles and albums, and displays them in descending chronological order.
 
-## Installation
+Once the most recent tracks have been pulled, the user is able to create their own playlists to store their favorite tracks. They can name their playlists as they like, add and remove songs and albums as they please, and their playlists will remain unchanged as their recent uploads evolve over time.
 
-1. [Download](../../archive/main.zip) this template.
-    - **Do Not Fork And Clone**
-    - Click the "Clone or Download" button and select "Download Zip".
-1. Move to the `sei/projects` directory, then unzip the template directory with
-    `unzip /Users/<user-name>/Downloads/browser-template-main.zip`.
-1. Rename the template directory from `browser-template-main` to
-    `<project-name>-client`.
-1. Empty [`README.md`](README.md) and fill with your own content.
-1. Replace all instances of `ga-wdi-boston.browser-template` with the name of
-    your project.
-    - You can search for all instances of text in Atom by pressing
-    `commant + shift + f` on Mac or `ctrl + shift + f` on WSL.
-1. Move into the new project and `git init`.
-1. Add all of the files in your project with the command `git add --all`.
-      - **Note: This is the only time you should run this command!**
-1. Commit all of your files with the command `git commit`.
-      - Your commit title should read `Initial commit`.
-1. Install dependencies with `npm install`.
-1. Create a new repository on [github.com](https://github.com),
-    _not GitHub Enterprise_.
-1. Name the new repository with the same name used on Step 3.
-1. Follow the instructions on your new repository's setup page. For details on
-   how to push to Github, refer to the section on Github entitled **"…or push an existing
-   repository from the command line."** Further documentation can be found [here](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/).
-   > **Note:** This last step will rename your default branch to **main**. This branch name will be used when deploying.
+The end result is an app that lets users stay up-to-date with their favorite artists without the hassle of checking in on them one at a time.
 
-## Structure
+## Planning
 
-### App
+### User Stories
+The user should be able to perform the following operations:
+- Sign up for a SpotiFeed account
+- Sign into said account
+- Change their password at any time
+- Sign out of their account
+- Sign into their Spotify account once signed into SpotiFeed
+- Obtain recent uploads for the artists they follow
+- Create and name playlists as they please
+- Add and remove their desired tracks to/from playlists
+- Delete playlists they no longer use
 
-Developers should store JavaScript files in [`app`](app).
-The "manifest" or entry-point is
-[`app/app.js`](app/app.js). In general, only
-application initialization goes in this file. It's normal for developers to
-start putting all code in this file, but encourage them to break out different
-responsibilities and use the `require` syntax put references where they're
-needed.
+### WireFrames
 
-### Config
+![Most Recent Tracks](../spotifeed_client/public/wireframe1.png)
+![Album upload design](../spotifeed_client/public/wireframe2.png)
 
-Developers should set `apiUrls.production` and `apiUrls.development` in
-[`app/config.js`](app/config.js).  With
-`apiUrls` set, developers may rely on `apiUrl` as the base for API
-URLs.
+## App Flow
 
-### Styles
+Upon loading the page, the user faces a blank feed with an option to log into an account. Once selected, a window will pop up to allow the user to enter their credentials, with an option to sign up for an account if they do not already have one.
 
-Developers should store styles in [`app/styles`](app/styles) and load them
-from [`app/styles/index.scss`](app/styles/index.scss). Bootstrap version 3 is
-included in this template.
+Upon sign in, a 'Log in with Spotify' button will appear, which will open a new window to allow the user to log in with their Spotify credentials. Successful log in will automatically close the new window and bring the user back to their SpotiFeed.
 
-### Forms and Using `getFormFields`
+The user can then select 'Get Latest Tracks', and in a few seconds see the most recent tracks from their followed artists.
 
-Developers should use [getFormFields](get-form-fields.md) to retrieve form data
-to send to an API.
+Each track has a button labeled 'Add to Playlist' which brings up a dropdown menu with all of their playlists. Playlists that are newly made will require a refresh of the latest tracks to update their playlist dropdown options. The user can then select the playlist they would like to add their album to, and the song will be added.
 
-### Deployment
+The user can navigate to their playlist via the menu bar on the left side of the screen. Upon clicking on their playlist, their feed will update with the playlist tracks. The user can navigate back to the previous screen using the back button, or select 'Get Latest Tracks' again to populate their screen with the newest data.
 
-To deploy a browser-template based SPA, run `grunt deploy`.
+The user can remove any track they wish from their playlist via the 'Remove from Playlist' button, and the track will disappear. 
 
-## Adding Images
+Once finished, the user has the option to sign out of their account, and all personal data will be removed from the screen and a new user will have the option to sign in.
 
-To add images to your project, you must store them in the `public` directory.
-To use the image in HTML or CSS, write the path to the image like this:
+## Link to Deployed Project
 
-```html
-<img src="public/cat.jpg">
-```
-or
-```css
-#my-cool-div {
-  background-image: url('public/cat.jpg')
-}
-```
-
-Note that there's no `./` or `/` in front of `public/filename.jpg`.
-
-## Adding Fonts
-
-To add custom fonts to your app, you can either use a CDN like Google Fonts, or
-you can download the fonts and save them in the `public` directory. If you use
-the former method, follow the directions on the website providing the fonts.
-
-For local fonts, put the files in `public`, and then import and use them in a
-`.scss` file like this:
-
-```scss
-@font-face {
-  font-family: 'Nature Beauty';
-  src: url('public/Nature-Beauty.ttf') format('truetype');
-}
-
-.element-with-custom-font {
-  font-family: 'Nature Beauty';
-}
-```
-
-## Tasks
-
-Developers should run these often!
-
-- `grunt nag` or just `grunt`: runs code quality analysis tools on your code
-    and complains
-- `grunt make-standard`: reformats all your code in the JavaScript Standard Style
-- `grunt <server|serve|s>`: generates bundles, watches, and livereloads
-- `grunt build`: place bundled styles and scripts where `index.html` can find
-    them
-- `grunt deploy`: builds and deploys main branch
-
-
-## Additional Resources
-
-- [Modern Javascript Explained for Dinosaurs](https://medium.com/@peterxjang/modern-javascript-explained-for-dinosaurs-f695e9747b70)
-- [Making Sense of Front End Build Tools](https://medium.freecodecamp.org/making-sense-of-front-end-build-tools-3a1b3a87043b)
-
-## [License](LICENSE)
-
-1. All content is licensed under a CC­BY­NC­SA 4.0 license.
-1. All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
+https://anthonyguariglia.github.io/SpotiFeed-Client/
