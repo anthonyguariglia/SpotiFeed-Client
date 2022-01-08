@@ -25,8 +25,8 @@ The user should be able to perform the following operations:
 
 ### WireFrames
 
-![Most Recent Tracks](../spotifeed_client/public/wireframe1.png)
-![Album upload design](../spotifeed_client/public/wireframe2.png)
+![Most Recent Tracks](https://i.imgur.com/xUvYXFX.png)
+![Album upload design](https://i.imgur.com/dgAZVRi.png)
 
 ## App Flow
 
