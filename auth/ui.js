@@ -13,8 +13,9 @@ const onSignUpSuccess = function () {
   $('form').trigger('reset')
 }
 
-const onSignUpFailure = function () {
-  $('.signin-response-message').text('Failed to Sign Up')
+const onSignUpFailure = function (response) {
+  console.log(response.responseJSON)
+  $('.signin-response-message').text(response.responseJSON)
 }
 
 const onSignInSuccess = function (response) {
